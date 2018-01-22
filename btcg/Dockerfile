@@ -1,4 +1,4 @@
 FROM ubuntu
 
-CMD ["./zcashnode.sh"]
+CMD ["./btcgnode.sh"]
 

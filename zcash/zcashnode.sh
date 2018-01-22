@@ -12,6 +12,7 @@ git clone https://github.com/zcash/zcash
 
 ./zcash/zcutil/build.sh
 
+mkdir ~/.zcash
 touch ~/.zcash/zcash.conf
 
 echo "

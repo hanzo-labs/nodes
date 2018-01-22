@@ -12,6 +12,7 @@ git clone https://github.com/MyHush/hush.git
 
 ./hush/zcutil/build.sh -j$(nproc)
 
+mkdir ~/.hush
 touch ~/.hush/hush.conf
 
 echo "

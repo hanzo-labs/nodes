@@ -1,4 +1,4 @@
 FROM ubuntu
 
-CMD ["./hushnode.sh"]
+CMD ["./zcashnode.sh"]
 

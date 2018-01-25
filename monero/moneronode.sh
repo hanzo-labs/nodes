@@ -19,6 +19,4 @@ log-file=~/.monero/monero.log
 log-level=0
 restricted-rpc=true" >> ~/.monero.conf
 
-screen
-
 ./build/release/bin/monerod --detach --config-file=~/.monero/monero.conf

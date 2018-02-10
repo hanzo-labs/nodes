@@ -2,9 +2,10 @@ FROM ubuntu:16.04
 
 RUN apt-get update && \
     apt-get -y install autoconf \
-                       automake
+                       automake \
                        bsdmainutils \
                        build-essential \
+                       curl \
                        g++-multilib \
                        git \
                        libc6-dev \
@@ -13,21 +14,24 @@ RUN apt-get update && \
                        ncurses-dev \
                        pkg-config \
                        python \
+                       python-software-properties \
+                       software-properties-common \
                        unzip \
                        wget \
                        zlib1g-dev
 
 # Add btcg deps
 RUN apt-get -y install libboost-all-dev autotools-dev libssl-dev libevent-dev libsodium-dev libzmq3-dev
-RUN add-apt-repository ppa:bitcoin/bitcoin
+RUN add-apt-repository ppa:bitcoin/bitcoin && apt-get update
 RUN apt-get -y install libdb4.8-dev libdb4.8++-dev
 
 # Build btcg
-RUN bash scripts/deps.sh
-RUN bash scripts/build.sh
+COPY scripts/ scripts
+COPY etc/bitcoingold.conf /root/.bitcoingold
+RUN ./scripts/build.sh
 
 # Add known good node
-RUN bgold-cli addnode 95.213.255.77:8338 add
+RUN ./BTCGPU/depends/x86_64-pc-linux-gnu/bin/bgold-cli addnode 95.213.255.77:8338 add
 
 # Run btcg daemon
-CMD bgoldd -bootstrap -printtoconsole -connect 95.213.255.77:8338
+CMD ./BTCGPU/depends/x86_64-pc-linux-gnu/bin/bgoldd -bootstrap -printtoconsole -connect 95.213.255.77:8338

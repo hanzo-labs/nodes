@@ -27,11 +27,10 @@ RUN apt-get -y install libdb4.8-dev libdb4.8++-dev
 
 # Build btcg
 COPY scripts/ scripts
-COPY etc/bitcoingold.conf /root/.bitcoingold
 RUN ./scripts/build.sh
 
-# Add known good node
-RUN ./BTCGPU/depends/x86_64-pc-linux-gnu/bin/bgold-cli addnode 95.213.255.77:8338 add
+# Copy over config
+COPY etc/bitcoingold.conf /root/.bitcoingold/bitcoingold.conf
 
 # Run btcg daemon
-CMD ./BTCGPU/depends/x86_64-pc-linux-gnu/bin/bgoldd -bootstrap -printtoconsole -connect 95.213.255.77:8338
+CMD ./BTCGPU/depends/x86_64-pc-linux-gnu/bin/bgoldd -bootstrap -printtoconsole

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hush
+spec:
+  containers:
+  - name: hush
+    image: gcr.io/secret-pool/hush:latest

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: zcash
+spec:
+  containers:
+  - name: zcash
+    image: gcr.io/secret-pool/zcash:latest

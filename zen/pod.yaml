@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: zen
+spec:
+  containers:
+  - name: zen
+    image: gcr.io/secret-pool/zen:latest

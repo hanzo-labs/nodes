@@ -18,15 +18,16 @@ RUN apt-get update && \
                        software-properties-common \
                        unzip \
                        wget \
-                       zlib1g-dev \
-                       golang-go
+                       zlib1g-dev
 
-# Build btcg
+RUN snap install --classic go
+
+# Build geth
 COPY scripts/ scripts
 RUN ./scripts/build.sh
 
 # Copy over config
-COPY etc/bitcoingold.conf /root/.bitcoingold/bitcoingold.conf
+# COPY etc/bitcoingold.conf /root/.bitcoingold/bitcoingold.conf
 
-# Run btcg daemon
-CMD ./BTCGPU/depends/x86_64-pc-linux-gnu/bin/bgoldd -bootstrap -printtoconsole
+# Run geth daemon
+CMD ./go-ethereum/build/bin/geth

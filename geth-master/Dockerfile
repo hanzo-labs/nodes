@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+RUN add-apt-repository ppa:longsleep/golang-backports
+
 RUN apt-get update && \
     apt-get -y install autoconf \
                        automake \
@@ -18,9 +20,9 @@ RUN apt-get update && \
                        software-properties-common \
                        unzip \
                        wget \
-                       zlib1g-dev
+                       zlib1g-dev \
+                       golang-go
 
-RUN snap install --classic go
 
 # Build geth
 COPY scripts/ scripts

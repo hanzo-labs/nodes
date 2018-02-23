@@ -24,3 +24,9 @@ logs:
 
 ssh:
 	kubectl exec -it eth-master -- /bin/bash
+
+storage:
+	kubectl create -f sc.yaml
+
+volume:
+	kubectl create -f claim.json

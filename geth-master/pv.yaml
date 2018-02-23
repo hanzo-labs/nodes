@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: geth-base
+spec:
+  capacity:
+    storage: 200Gi
+  accessModes:
+    - ReadOnlyMany
+  gcePersistentDisk:
+    pdName: geth-base-disk
+    fsType: ext4

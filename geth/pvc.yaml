@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: geth-volume-claim
+  name: geth-mainnet-pvc
 spec:
-  storageClassName: geth-storage-class
+  storageClassName: ssd-retain-sc
   accessModes:
     - ReadWriteOnce
     - ReadOnlyMany
   resources:
     requests:
-      storage: 200Gi
+      storage: 1000G

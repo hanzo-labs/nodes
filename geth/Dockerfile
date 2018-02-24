@@ -28,8 +28,5 @@ RUN apt-get update && \
 COPY scripts/ scripts
 RUN ./scripts/build.sh
 
-# Copy over config
-# COPY etc/bitcoingold.conf /root/.bitcoingold/bitcoingold.conf
-
 # Run geth daemon
-CMD ./go-ethereum/build/bin/geth
+CMD ./go-ethereum/build/bin/geth --cache=1024 --rpc --rpcaddr 0.0.0.0 --rpcport 13264 --syncmode=fast --rpccorsdomain "*"

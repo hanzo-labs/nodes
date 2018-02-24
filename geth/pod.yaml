@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: geth-mainnet
+spec:
+  containers:
+    - name: geth-mainnet
+      image: nginx
+      volumeMounts:
+        - mountPath: '/geth-mainnet-pv'
+          name: geth-mainnet-pv
+  volumes:
+    - name: geth-mainnet-pv
+      persistentVolumeClaim:
+        claimName: geth-mainnet-pvc

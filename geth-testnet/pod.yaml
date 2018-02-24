@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: geth-testnet
+spec:
+  containers:
+    - name: geth-testnet
+      image: nginx
+      volumeMounts:
+        - mountPath: '/geth-testnet-pv'
+          name: geth-testnet-pv
+  volumes:
+    - name: geth-testnet-pv
+      persistentVolumeClaim:
+        claimName: geth-testnet-pvc

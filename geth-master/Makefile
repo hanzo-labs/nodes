@@ -25,8 +25,11 @@ logs:
 ssh:
 	kubectl exec -it eth-master -- /bin/bash
 
-storage:
-	kubectl create -f sc.yaml
+create-volume:
+	kubectl apply -f sc.yaml
+	kubectl apply -f pvc.yaml
+	gcloud compute disks create --size=200GB --zone=us-central1-a geth-disk
+	kubectl apply -f pv.yaml
 
-volume:
-	kubectl create -f claim.json
+create-temp: create-volume
+	kubectl apply -f pod-temp.yaml

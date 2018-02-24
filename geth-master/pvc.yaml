@@ -4,11 +4,10 @@ metadata:
   name: geth-volume-claim
 spec:
   volumeName: geth-volume
+  storageClassName: geth-storage-class
   accessModes:
     - ReadWriteOnce
     - ReadOnlyMany
   resources:
     requests:
       storage: 200Gi
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: geth-storage-class

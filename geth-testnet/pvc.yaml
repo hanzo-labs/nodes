@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: geth-testnet-volume-claim
+spec:
+  volumeName: geth-testnet-volume
+  storageClassName: geth-testnet-storage-class
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 200Gi

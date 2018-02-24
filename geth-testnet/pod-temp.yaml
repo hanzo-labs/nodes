@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: geth-testnet-temp
+spec:
+  containers:
+    - name: geth-testnet-temp
+      image: ubuntu
+      volumeMounts:
+        - mountPath: '/geth-testnet-volume'
+          name: geth-testnet-volume
+  volumes:
+    - name: geth-testnet-volume
+      persistentVolumeClaim:
+        claimName: geth-testnet-volume-claim

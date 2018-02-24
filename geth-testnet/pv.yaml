@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: geth-testnet-volume
+spec:
+  capacity:
+    storage: 200Gi
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany
+  claimRef:
+    kind: PersistentVolumeClaim
+    name: geth-testnet-volume-claim
+  persistentVolumeReclaimPolicy: Retain
+  gcePersistentDisk:
+    pdName: geth-testnet-disk
+    fsType: ext4

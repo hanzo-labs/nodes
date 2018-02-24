@@ -5,9 +5,11 @@ metadata:
 spec:
   containers:
     - name: geth-mainnet
-      image: nginx
+      image: gcr.io/hanzo-ai/geth:latest
+      command:
+        - ./go-ethereum/build/bin/geth --data-dir /ethereum --cache=1024 --rpc --rpcaddr 0.0.0.0 --rpcport 13264 --syncmode=fast --rpccorsdomain "*"
       volumeMounts:
-        - mountPath: '/geth-mainnet-pv'
+        - mountPath: '/ethereum'
           name: geth-mainnet-pv
   volumes:
     - name: geth-mainnet-pv

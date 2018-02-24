@@ -1,35 +1,40 @@
 export KUBECONFIG=../config/hanzoai.yaml
 
+sha1 := $(shell git rev-parse --short=8 HEAD)
+net  := mainnet
+env  := config/$(net)
+
 all: deploy
 
 build:
-	docker build . -t eth-master:latest
-	docker tag eth-master:latest gcr.io/secret-pool/eth-master:latest
-	gcloud docker -- push gcr.io/secret-pool/eth-master:latest
+	docker build . -t geth:$(sha1)
+	docker tag geth:$(sha1) gcr.io/hanzo-ai/geth:$(sha1)
+	gcloud docker -- push gcr.io/hanzo-ai/geth:$(sha1)
 
 create: build
+	docker build . -t znomp:v0
+	docker tag znomp:v0 gcr.io/secret-pool/znomp:v0
+	gcloud docker -- push gcr.io/secret-pool/znomp:v0
 	kubectl create -f pod.yaml
 
 deploy: build
-	kubectl apply -f pod.yaml
+	kubectl set image deployment/geth-mainnet geth-mainnet=gcr.io/hanzo-ai/geth:$(sha1)
 
 delete:
-	kubectl delete eth-master
+	kubectl delete geth-mainnet
+	kubectl delete -f $(env)/geth-deployment.yaml
 
 status:
-	kubectl get pod eth-master -o yaml
+	kubectl get pod geth-mainnet -o yaml
 
 logs:
-	kubectl logs eth-master -f
+	kubectl logs geth-mainnet -f
 
 ssh:
-	kubectl exec -it eth-master -- /bin/bash
+	kubectl exec -it geth-mainnet -- /bin/bash
 
 create-volume:
-	kubectl apply -f sc.yaml
-	kubectl apply -f pvc.yaml
-	gcloud compute disks create --size=200GB --zone=us-central1-a geth-disk
-	kubectl apply -f pv.yaml
-
-create-temp: create-volume
-	kubectl apply -f pod-temp.yaml
+	kubectl apply -f $(env)/sc.yaml
+	kubectl apply -f $(env)/pvc.yaml
+	gcloud compute disks create --size=1000GB --zone=us-central1-a geth-$(net)-disk
+	kubectl apply -f $(env)pv.yaml

@@ -27,6 +27,3 @@ RUN apt-get update && \
 # Build geth
 COPY scripts/ scripts
 RUN ./scripts/build.sh
-
-# Run geth daemon
-CMD ./go-ethereum/build/bin/geth --cache=1024 --rpc --rpcaddr 0.0.0.0 --rpcport 13264 --syncmode=fast --rpccorsdomain "*"

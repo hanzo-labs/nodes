@@ -1,9 +1,9 @@
-kind: StorageClass
 apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
-  name: geth-base
+  name: geth-storage-class
 provisioner: kubernetes.io/gce-pd
 parameters:
-  type: pd-standard
+  type: pd-ssd
   zone: us-central1-a
   fsType: ext4

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: geth-volume-claim
+spec:
+  volumeName: geth-volume
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 200Gi
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: geth-storage-class

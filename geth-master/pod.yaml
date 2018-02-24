@@ -1,8 +1,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: geth
+  name: geth-temp
 spec:
   containers:
-  - name: geth
-    image: gcr.io/secret-pool/geth:latest
+    - name: geth-temp
+      image: ubuntu
+      volumeMounts:
+        - mountPath: '/geth-volume'
+          name: geth-volume
+  volumes:
+    - name: geth-volume
+      persistentVolumeClaim:
+        claimName: geth-volume-claim

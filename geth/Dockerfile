@@ -22,7 +22,8 @@ RUN apt-get update && \
 
 RUN add-apt-repository ppa:longsleep/golang-backports
 
-RUN apt-get -y install golang-go
+RUN apt-get update && \
+    apt-get -y install golang-go
 
 # Build geth
 COPY scripts/ scripts
